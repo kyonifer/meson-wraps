@@ -10,12 +10,15 @@ xtensor_dep = dependency('xtensor',
 
 python = import('python').find_installation()
 
-npy_incstr = run_command([python, '-c', 'import numpy; print(numpy.get_include())'], check: true).stdout().strip()
-npy_incdir = include_directories(npy_incstr)
+npy_incstr = run_command([python, '-c', 'import numpy; print(numpy.get_include())'], check: false).stdout().strip()
+if (npy_incstr == '')
+    warning('Unable to find numpy (Looking for it using ' + python.path() + ')')
+endif
 
-
-## Define our dep
-
-xtensor_python_dep = declare_dependency(
-                    include_directories:[include_directories('include'), npy_incdir],
-                    dependencies:[xtensor_dep, pybind_dep])
+if (npy_incstr == '')
+    xtensor_python_dep = disabler()
+else
+    xtensor_python_dep = declare_dependency(
+                        include_directories:[include_directories('include'), include_directories(npy_incstr)],
+                        dependencies:[xtensor_dep, pybind_dep])
+endif

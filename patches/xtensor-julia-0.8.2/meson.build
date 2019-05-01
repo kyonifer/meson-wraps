@@ -12,18 +12,38 @@ cc = meson.get_compiler('cpp')
 
 ## Hunt for libjulia and julia's headers
 
-julia_libdir = run_command(['julia',
-                    '--startup-file=no',
-                    '-e',
-                    'using Libdl;print(abspath(dirname(Libdl.dlpath("libjulia"))))'
-                ], check: true).stdout().strip()
-julia_incdir = include_directories(run_command(['julia',
-                    '--startup-file=no',
-                    '-e',
-                    'julia_include_dir = print(joinpath(match(r"(.*)(bin)",Sys.BINDIR).captures[1],"include","julia"))'
-                ], check: true).stdout().strip(), is_system : true)
-julia_lib = cc.find_library('julia',
-                    dirs : [julia_libdir])
+julia = find_program('julia', required: false)
+
+if (julia.found())
+    julia_libdir = run_command(['julia',
+                        '--startup-file=no',
+                        '-e',
+                        'using Libdl;print(abspath(dirname(Libdl.dlpath("libjulia"))))'
+                    ], check: false).stdout().strip()
+    if (julia_libdir == '')
+        julia_libdir = disabler()
+    endif
+    julia_incdir = run_command(['julia',
+                                           '--startup-file=no',
+                                           '-e',
+                                           'julia_include_dir = print(joinpath(match(r"(.*)(bin)",Sys.BINDIR).captures[1],"include","julia"))'
+                                       ], check: false).stdout().strip()
+    if (julia_incdir == '')
+        julia_incdir = disabler()
+    else
+        julia_incdir = include_directories(julia_incdir)
+    endif
+    julia_lib = cc.find_library('julia',
+                        dirs : [julia_libdir],
+                        required : false)
+    if (not julia_lib.found())
+        julia_lib = disabler()
+    endif
+else
+    julia_libdir = disabler()
+    julia_incdir = disabler()
+    julia_lib = disabler()
+endif
 
 ## Hunt for the cxxwrap lib and headers installed by CxxWrap.
 
@@ -31,19 +51,33 @@ julia_lib = cc.find_library('julia',
 # the versions differ we'll link against a different version
 # than CxxWrap.jl loads at runtime.
 
-# TODO: Check if the user has done a `Pkg.add('CxxWrap')`, and if not complain & abort
-
 cxxwrap_libdir = run_command(['julia',
                     '--startup-file=no',
                     '-e',
                     'using CxxWrap;print(dirname(CxxWrap.libcxxwrap_julia))'
-                ], check: true).stdout().strip()
-cxxwrap_incdir = include_directories(run_command(['julia',
-                    '--startup-file=no',
-                    '-e',
-                    'using CxxWrap;print(joinpath(CxxWrap.prefix().path, "include"))'
-                ], check: true).stdout().strip(), is_system : true)
-cxxwrap_lib = cc.find_library('libcxxwrap_julia', dirs : cxxwrap_libdir)
+                ], check: false).stdout().strip()
+if (cxxwrap_libdir == '')
+  warning('CxxWrap libdir not found in Julia installation. Disabling Julia bindings.')
+  cxxwrap_libdir = disabler()
+endif
+
+cxxwrap_incdir = run_command(['julia',
+                                     '--startup-file=no',
+                                     '-e',
+                                     'using CxxWrap;print(joinpath(CxxWrap.prefix().path, "include"))'
+                                 ], check: false).stdout().strip()
+if (cxxwrap_incdir == '')
+  warning('CxxWrap headers not found in Julia installation. Disabling Julia bindings.')
+  cxxwrap_incdir = disabler()
+else
+    cxxwrap_incdir = include_directories(cxxwrap_incdir)
+endif
+
+cxxwrap_lib = cc.find_library('libcxxwrap_julia', dirs : cxxwrap_libdir, required: false)
+if (not cxxwrap_lib.found())
+  warning('CxxWrap library not found in Julia installation. Disabling Julia bindings.')
+  cxxwrap_lib = disabler()
+endif
 
 ## Define our dep
 
