@@ -39,54 +39,50 @@ if (julia.found())
     if (not julia_lib.found())
         julia_lib = disabler()
     endif
+
+    ## Hunt for the cxxwrap lib and headers installed by CxxWrap.
+
+    # We can't subproject `libcxxwrap-julia` ourselves, because if
+    # the versions differ we'll link against a different version
+    # than CxxWrap.jl loads at runtime.
+
+    cxxwrap_libdir = run_command(['julia',
+                        '--startup-file=no',
+                        '-e',
+                        'using CxxWrap;print(dirname(CxxWrap.libcxxwrap_julia))'
+                    ], check: false).stdout().strip()
+    if (cxxwrap_libdir == '')
+    warning('CxxWrap libdir not found in Julia installation. Disabling Julia bindings.')
+    cxxwrap_libdir = disabler()
+    endif
+
+    cxxwrap_incdir = run_command(['julia',
+                                        '--startup-file=no',
+                                        '-e',
+                                        'using CxxWrap;print(joinpath(CxxWrap.prefix().path, "include"))'
+                                    ], check: false).stdout().strip()
+    if (cxxwrap_incdir == '')
+    warning('CxxWrap headers not found in Julia installation. Disabling Julia bindings.')
+    cxxwrap_incdir = disabler()
+    else
+        cxxwrap_incdir = include_directories(cxxwrap_incdir)
+    endif
+
+    cxxwrap_lib = cc.find_library('libcxxwrap_julia', dirs : cxxwrap_libdir, required: false)
+    if (not cxxwrap_lib.found())
+    warning('CxxWrap library not found in Julia installation. Disabling Julia bindings.')
+    cxxwrap_lib = disabler()
+    endif
+
+    ## Define our dep
+
+    xtensor_julia_dep = declare_dependency(
+                        include_directories:[include_directories('include'),
+                            julia_incdir,
+                            cxxwrap_incdir],
+                        dependencies:[xtensor_dep, cxxwrap_lib, julia_lib],
+                        compile_args : ['-DJLCXX_EXPORTS', '-DJULIA_ENABLE_THREADING', '-Dcxxwrap_julia_EXPORTS'])
+
 else
-    julia_libdir = disabler()
-    julia_incdir = disabler()
-    julia_lib = disabler()
+    xtensor_julia_dep = disabler()
 endif
-
-## Hunt for the cxxwrap lib and headers installed by CxxWrap.
-
-# We can't subproject `libcxxwrap-julia` ourselves, because if
-# the versions differ we'll link against a different version
-# than CxxWrap.jl loads at runtime.
-
-cxxwrap_libdir = run_command(['julia',
-                    '--startup-file=no',
-                    '-e',
-                    'using CxxWrap;print(dirname(CxxWrap.libcxxwrap_julia))'
-                ], check: false).stdout().strip()
-if (cxxwrap_libdir == '')
-  warning('CxxWrap libdir not found in Julia installation. Disabling Julia bindings.')
-  cxxwrap_libdir = disabler()
-endif
-
-cxxwrap_incdir = run_command(['julia',
-                                     '--startup-file=no',
-                                     '-e',
-                                     'using CxxWrap;print(joinpath(CxxWrap.prefix().path, "include"))'
-                                 ], check: false).stdout().strip()
-if (cxxwrap_incdir == '')
-  warning('CxxWrap headers not found in Julia installation. Disabling Julia bindings.')
-  cxxwrap_incdir = disabler()
-else
-    cxxwrap_incdir = include_directories(cxxwrap_incdir)
-endif
-
-cxxwrap_lib = cc.find_library('libcxxwrap_julia', dirs : cxxwrap_libdir, required: false)
-if (not cxxwrap_lib.found())
-  warning('CxxWrap library not found in Julia installation. Disabling Julia bindings.')
-  cxxwrap_lib = disabler()
-endif
-
-## Define our dep
-
-xtensor_julia_dep = declare_dependency(
-                    include_directories:[include_directories('include'),
-                        julia_incdir,
-                        cxxwrap_incdir],
-                    dependencies:[xtensor_dep, cxxwrap_lib, julia_lib],
-                    compile_args : ['-DJLCXX_EXPORTS', '-DJULIA_ENABLE_THREADING', '-Dcxxwrap_julia_EXPORTS'])
-
-
-
