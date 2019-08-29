@@ -17,7 +17,7 @@ if get_option('XTENSOR_USE_XSIMD')
   xtensor_cpp_arg = ['-DXTENSOR_USE_XSIMD']
 endif
 
-xtensor_dep = declare_dependency(include_directories:include_directories('include'),
+xtensor_dep = declare_dependency(include_directories:include_directories('include', is_system: true),
                                  dependencies:xtensor_dependencies,
                                  compile_args:xtensor_cpp_arg)
 

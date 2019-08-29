@@ -31,7 +31,7 @@ if (julia.found())
     if (julia_incdir == '')
         julia_incdir = disabler()
     else
-        julia_incdir = include_directories(julia_incdir)
+        julia_incdir = include_directories(julia_incdir, is_system: true)
     endif
     julia_lib = cc.find_library('julia',
                         dirs : [julia_libdir],
@@ -65,7 +65,7 @@ if (julia.found())
     warning('CxxWrap headers not found in Julia installation. Disabling Julia bindings.')
     cxxwrap_incdir = disabler()
     else
-        cxxwrap_incdir = include_directories(cxxwrap_incdir)
+        cxxwrap_incdir = include_directories(cxxwrap_incdir, is_system: true)
     endif
 
     cxxwrap_lib = cc.find_library('libcxxwrap_julia', dirs : cxxwrap_libdir, required: false)
@@ -77,7 +77,7 @@ if (julia.found())
     ## Define our dep
 
     xtensor_julia_dep = declare_dependency(
-                        include_directories:[include_directories('include'),
+                        include_directories:[include_directories('include', is_system: true),
                             julia_incdir,
                             cxxwrap_incdir],
                         dependencies:[xtensor_dep, cxxwrap_lib, julia_lib],

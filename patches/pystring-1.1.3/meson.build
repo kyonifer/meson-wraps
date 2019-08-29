@@ -10,6 +10,6 @@ pystring_lib = static_library(
 
 pystring_dep = declare_dependency(
     link_with: pystring_lib,
-    include_directories: include_directories('.'))
+    include_directories: include_directories('.', is_system: true))
 
 
