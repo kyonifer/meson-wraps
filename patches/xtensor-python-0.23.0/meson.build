@@ -25,7 +25,8 @@ else
         xtensor_python_dep = disabler()
     else
         xtensor_python_dep = declare_dependency(
-                            include_directories:[include_directories('include'), include_directories(npy_incstr)],
+                            include_directories:[include_directories('include', is_system: true),
+                            include_directories(npy_incstr, is_system: true)],
                             dependencies:[xtensor_dep, pybind_dep])
     endif
 endif
