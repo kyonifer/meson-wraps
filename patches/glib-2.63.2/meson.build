@@ -2154,45 +2154,51 @@ test_timeout_slow = 180
 
 pkg = import('pkgconfig')
 windows = import('windows')
-subdir('glib')
-subdir('gobject')
-subdir('gthread')
-subdir('gmodule')
-subdir('gio')
-subdir('fuzzing')
-if build_tests
-  subdir('tests')
-endif
 
-# xgettext is optional (on Windows for instance)
-if find_program('xgettext', required : get_option('nls')).found()
-  subdir('po')
-endif
+if get_option('only_build_libglib')
+  build_tests = false
+  subdir('glib')
+else
+  subdir('glib')
+  subdir('gobject')
+  subdir('gthread')
+  subdir('gmodule')
+  subdir('gio')
+  subdir('fuzzing')
+  if build_tests
+    subdir('tests')
+  endif
 
-# Install glib-gettextize executable, if a UNIX-style shell is found
-if have_sh
-  # These should not contain " quotes around the values
-  gettextize_conf = configuration_data()
-  gettextize_conf.set('PACKAGE', 'glib')
-  gettextize_conf.set('VERSION', meson.project_version())
-  gettextize_conf.set('prefix', glib_prefix)
-  gettextize_conf.set('datarootdir', glib_datadir)
-  gettextize_conf.set('datadir', glib_datadir)
-  configure_file(input : 'glib-gettextize.in',
-    install_dir : glib_bindir,
-    output : 'glib-gettextize',
-    configuration : gettextize_conf)
-endif
+  # xgettext is optional (on Windows for instance)
+  if find_program('xgettext', required : get_option('nls')).found()
+    subdir('po')
+  endif
 
-# Install m4 macros that other projects use
-install_data('m4macros/glib-2.0.m4', 'm4macros/glib-gettext.m4', 'm4macros/gsettings.m4',
-  install_dir : join_paths(get_option('datadir'), 'aclocal'))
+  # Install glib-gettextize executable, if a UNIX-style shell is found
+  if have_sh
+    # These should not contain " quotes around the values
+    gettextize_conf = configuration_data()
+    gettextize_conf.set('PACKAGE', 'glib')
+    gettextize_conf.set('VERSION', meson.project_version())
+    gettextize_conf.set('prefix', glib_prefix)
+    gettextize_conf.set('datarootdir', glib_datadir)
+    gettextize_conf.set('datadir', glib_datadir)
+    configure_file(input : 'glib-gettextize.in',
+      install_dir : glib_bindir,
+      output : 'glib-gettextize',
+      configuration : gettextize_conf)
+  endif
 
-if host_system != 'windows'
-  # Install Valgrind suppression file (except on Windows,
-  # as Valgrind is currently not supported on Windows)
-  install_data('glib.supp',
-    install_dir : join_paths(get_option('datadir'), 'glib-2.0', 'valgrind'))
+  # Install m4 macros that other projects use
+  install_data('m4macros/glib-2.0.m4', 'm4macros/glib-gettext.m4', 'm4macros/gsettings.m4',
+    install_dir : join_paths(get_option('datadir'), 'aclocal'))
+
+  if host_system != 'windows'
+    # Install Valgrind suppression file (except on Windows,
+    # as Valgrind is currently not supported on Windows)
+    install_data('glib.supp',
+      install_dir : join_paths(get_option('datadir'), 'glib-2.0', 'valgrind'))
+  endif
 endif
 
 configure_file(output : 'config.h', configuration : glib_conf)

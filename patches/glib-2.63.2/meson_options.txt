@@ -31,7 +31,7 @@ option('xattr',
 
 option('libmount',
        type : 'boolean',
-       value : true,
+       value : false,
        description : 'build with libmount support')
 
 option('internal_pcre',
@@ -94,3 +94,8 @@ option('oss_fuzz',
        type : 'feature',
        value : 'disabled',
        description : 'Indicate oss-fuzz build environment')
+
+option('only_build_libglib',
+       type : 'boolean',
+       value : true,
+       description : 'Disable build of gobject, gthread, gmodule, gio, fuzzing, and tests')

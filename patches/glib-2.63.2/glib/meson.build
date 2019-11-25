@@ -359,6 +359,7 @@ libglib = library('glib-2.0',
   dependencies : pcre_deps + [thread_dep, libintl, librt] + libiconv + platform_deps + gnulib_libm_dependency,
   c_args : glib_c_args,
   objc_args : glib_c_args,
+  override_options : ['c_std=gnu11']
 )
 
 libglib_dep = declare_dependency(
