@@ -82,6 +82,13 @@ xtensor_includes = [include_directories('include', is_system: true)]
 xtensor_blas_deps = [dependency('blas'), dependency('lapack')] # External library installed on the system
 # FIXME:  Had to install liblapack-dev, libblas-dev to get this to work
 
+# Fedora specfically requires 'cblas' for reasons unknown
+if (host_machine.system() == 'windows')
+    os_name = run_command('head', '-1', '/etc/os-release').stdout().strip()
+    if (os_name == 'NAME=Fedora')
+        xtensor_blas_deps += [dependency('cblas')]
+    endif
+endif
 
 xtensor_blas_dep = declare_dependency(include_directories: xtensor_includes,
                                       dependencies: xtensor_blas_deps,
