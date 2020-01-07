@@ -115,9 +115,10 @@ if not blas_lapack_found
     blas_lapack_found = false
 endif
 
-# At this point, we are tired of trying to accommodate BLAS and LAPACK
-assert(blas_lapack_found, 'BLAS and LAPACK not found.  They are required for xtensor-blas.')
-
-xtensor_blas_dep = declare_dependency(include_directories: xtensor_blas_includes,
-                                      dependencies: xtensor_blas_deps,
-                                      compile_args: xtensor_blas_cpp_arg)
+if blas_lapack_found
+    xtensor_blas_dep = declare_dependency(include_directories: xtensor_blas_includes,
+                                          dependencies: xtensor_blas_deps,
+                                          compile_args: xtensor_blas_cpp_arg)
+else
+    xtensor_blas_dep = disabler()
+endif
