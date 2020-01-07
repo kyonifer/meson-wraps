@@ -16,9 +16,9 @@ xtensor_blas_includes = [include_directories('include', is_system: true)]
 # netlib maintains a reference implementation of each (www.netlib.org). Their APIs have been used to create 
 # better performing libraries over the years.
 
-# The build machine should provide a BLAS implementation and a LAPACK implementation.  
+# The build machine should provide a BLAS implementation and a LAPACK implementation.  There are many options.
 
-# Here we begin the long journey of attempting to find BLAS and LAPACK libraries.
+# Here we begin the long journey of attempting to find said BLAS and LAPACK implementations.
 blas_lapack_found = false
 
 # Our first choice is OpenBLAS, if that is installed on the system.
@@ -35,9 +35,12 @@ endif
 # Our next choice for Mac is the Accelerate framework
 if (not blas_lapack_found) and (host_machine.system() == 'darwin')
 
-    # TODO for Mac:  try accelerate
-    blas_lapack_found = false
+    accelerate_framework = dependency('Accelerate', required: false)
 
+    if accelerate_framework.found()
+        blas_lapack_found = true
+        xtensor_blas_deps += [accelerate_framework]
+    endif
 endif
 
 # Our next choice could be MKL (Intel Math Kernel Library) for Intel platforms
@@ -89,6 +92,7 @@ if not blas_lapack_found
     # - OpenBLAS
     #   * Provides an optimized BLAS 
     #   * Although not advertised, provdies a complete LAPACK implementation, partially optimized.
+    #   * Requires a FORTRAN compiler
     # - BLIS - https://github.com/flame/blis 
     #   * Provides BLAS compatibility.  Claims to be faster than OpenBLAS.
     #   * Unclear if it provides any LAPACK functions.
@@ -96,6 +100,7 @@ if not blas_lapack_found
     #   * Provides some optimized LAPACK functions
     #   * For LAPACK functions that aren't optimized, they also have a complete reference implementation.
     #   * Provides some kind of BLAS, but should be able to interoperate with BLIS
+    #   * Requires a FORTRAN compiler
 
     blas_lapack_found = false
 
