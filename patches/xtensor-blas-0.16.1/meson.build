@@ -45,6 +45,7 @@ endif
 
 # Our next choice could be MKL (Intel Math Kernel Library) for Intel platforms
 if not blas_lapack_found
+    # TODO:  Check platform and add dependency for MKL; set the following to true if found
     blas_lapack_found = false
 endif
 
@@ -88,6 +89,9 @@ endif
 # Our next choice is to try to build a library included as a subproject.
 if not blas_lapack_found
 
+    # TODO:  Add subproject dependency; set the following to true if found
+    blas_lapack_found = false
+
     # Top contenders include:
     # - OpenBLAS
     #   * Provides an optimized BLAS 
@@ -101,8 +105,6 @@ if not blas_lapack_found
     #   * For LAPACK functions that aren't optimized, they also have a complete reference implementation.
     #   * Provides some kind of BLAS, but should be able to interoperate with BLIS
     #   * Requires a FORTRAN compiler
-
-    blas_lapack_found = false
 
 endif
 
@@ -120,5 +122,6 @@ if blas_lapack_found
                                           dependencies: xtensor_blas_deps,
                                           compile_args: xtensor_blas_cpp_arg)
 else
+    warning('Could not find BLAS and LAPACK libraries, disabling xtensor-blas.')
     xtensor_blas_dep = disabler()
 endif
