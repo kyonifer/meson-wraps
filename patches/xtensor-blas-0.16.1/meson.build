@@ -73,7 +73,7 @@ endif
 # Our next choice for Windows are the prebuilt OpenBLAS libraries that we included with the Meson wrap.
 if (not blas_lapack_found) and (host_machine.system() == 'windows')
 
-    prebuilt_openblas_dep = subproject('openblas-dll-0.3.7').get_variable('openblas_dll_dep')
+    prebuilt_openblas_dep = subproject('openblas-dll').get_variable('openblas_dll_dep')
     
     if prebuilt_openblas_dep.found()
         blas_lapack_found = true
