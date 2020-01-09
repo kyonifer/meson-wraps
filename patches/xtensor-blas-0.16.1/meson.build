@@ -72,15 +72,12 @@ endif
 
 # Our next choice for Windows are the prebuilt OpenBLAS libraries that we included with the Meson wrap.
 if (not blas_lapack_found) and (host_machine.system() == 'windows')
-    cc = meson.get_compiler('cpp')
-    # Download location:  https://ayera.dl.sourceforge.net/project/openblas/v0.3.7/OpenBLAS-0.3.7-x64.zip
-    prebuilt_openblas_dep = cc.find_library('openblas', dirs: [meson.current_source_dir() + '/windows-x64-libs'], required: false)
-    # Download location:  https://newcontinuum.dl.sourceforge.net/project/openblas/v0.2.12/mingw64_dll.zip
-    prebuilt_gfortran_dep = cc.find_library('gfortran-3', dirs: [meson.current_source_dir() + '/windows-x64-libs'], required: false)
+
+    prebuilt_openblas_dep = subproject('openblas-dll-0.3.7').get_variable('openblas_dll_dep')
     
-    if prebuilt_openblas_dep.found() and prebuilt_gfortran_dep.found()
+    if prebuilt_openblas_dep.found()
         blas_lapack_found = true
-        xtensor_blas_deps += [prebuilt_openblas_dep, prebuilt_gfortran_dep]
+        xtensor_blas_deps += [prebuilt_openblas_dep]
         warning('BLAS and LAPACK were not found installed on the system.  Falling back to prebuilt OpenBLAS.')
     endif
 
