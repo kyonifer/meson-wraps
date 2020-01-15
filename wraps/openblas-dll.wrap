@@ -6,7 +6,6 @@ source_filename=OpenBLAS-0.3.7-x64.zip
 source_hash=564bad9234583b6f1b7da865f8beb6ee9043a7a22054447952d31db08fc19bea
 lead_directory_missing=true
 
-# TODO:  Add patch file
-patch_url=
-patch_filename=
-patch_hash=
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/openblas-dll-0.3.7-patches.zip
+patch_filename=openblas-dll-0.3.7-patches.zip
+patch_hash=17c00a3476be13461452775e495654ed5b5b96582ff0cedecc50213f313fb755

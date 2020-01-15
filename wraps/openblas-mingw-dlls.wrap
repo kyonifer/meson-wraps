@@ -6,7 +6,6 @@ source_filename=mingw64_dll.zip
 source_hash=a75b3bdd35d48dd9e7de6bad0442e9aedc8b73420390f9949a2ac7dd20071b71
 lead_directory_missing=true
 
-# TODO:  Add patch file
-patch_url=
-patch_filename=
-patch_hash=
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/openblas-mingw-dlls-0.2.12-patches.zip
+patch_filename=openblas-mingw-dlls-0.2.12-patches.zip
+patch_hash=98b648b48fd2a077991df2b5b460840bc1324cb9f51d37bbdf1455acff083155
