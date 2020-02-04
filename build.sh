@@ -8,7 +8,7 @@ for i in */; do
     ZIPNAME=../zips/${FNAME}
 
     if [ ! -f "${ZIPNAME}" ]; then
-        zip -r "${ZIPNAME}" "$i"
+        zip -r "${ZIPNAME}" "$i" --exclude "${i}upstream.wrap"
     fi
 done
 

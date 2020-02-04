@@ -1,0 +1,7 @@
+[wrap-file]
+directory=openblas-mingw-dlls-0.2.12
+
+source_url=https://newcontinuum.dl.sourceforge.net/project/openblas/v0.2.12/mingw64_dll.zip
+source_filename=mingw64_dll.zip
+source_hash=a75b3bdd35d48dd9e7de6bad0442e9aedc8b73420390f9949a2ac7dd20071b71
+lead_directory_missing=true
