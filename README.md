@@ -1,3 +1,7 @@
+The purpose of this repository is to test new or modified wrap files.  Ultimately they should be added to meson wrapdb following the instructions in the [Meson documentation](https://mesonbuild.com/Wrap-dependency-system-manual.html).
+
+----
+
 To add a new project or version of a project:
 
 Create a new subfolder in `patches` named 'project-version'.  Inside this subfolder place the meson.build file(s) as they would apply to the project; and also an `upstream.wrap` file following this template:
@@ -26,6 +30,14 @@ To modify an existing project:
 1. Review the updated zip file generated in the zips folder
 1. Review the updated wrap file generated in the wraps folder
 1. Commit and push changes
+
+----
+
+To help differentiate and avoid potential naming conflicts when these projects are eventually added to wrapdb, the format of the zip file name differs from that of zip files downloaded from wrapdb.
+
+Wrapdb:  `project-%ver-%wrapver-wrap.zip`
+
+Here:    `project-%ver-patches-$wrapver.zip`
 
 ----
 
