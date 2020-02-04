@@ -2,5 +2,5 @@
 directory=xtensor-blas-0.16.1
 
 source_url=https://github.com/xtensor-stack/xtensor-blas/archive/0.16.1.zip
-source_filename=0.16.1.zip
+source_filename=xtensor-blas-0.16.1.zip
 source_hash=f529f613fb6cde1ad772756b43ef5b24ee4ba3a356b6fc2600d8775e0efeacbd
