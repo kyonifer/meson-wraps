@@ -4,32 +4,38 @@ The purpose of this repository is to test new or modified wrap files.  Ultimatel
 
 To add a new project or version of a project:
 
-Create a new subfolder in `patches` named 'project-version'.  Inside this subfolder place the meson.build file(s) as they would apply to the project; and also an `upstream.wrap` file following this template:
+1. Create a new subfolder in `patches` named 'project-version'.  
+1. Inside this subfolder place the meson.build file(s) as they would apply to the project
+1. Also add an `upstream.wrap` file following this template:
+    ```
+    [wrap-file]
+    directory=project-0.1
 
-```
-[wrap-file]
-directory=project-0.1
-
-source_url=https://example.com/download/0.1/project-0.1.zip
-source_filename=project-0.1.zip
-source_hash=0000000000000000000000000000000000000000000000000000000000000000
-```
-
-Then run the `build.bash` script.  Two files should be generated:
-1. A zip file in the zips folder
-1. A wrap file in the wraps folder
-
-Review both, then commit and push the changes.
+    source_url=https://example.com/download/0.1/project-0.1.zip
+    source_filename=project-0.1.zip
+    source_hash=0000000000000000000000000000000000000000000000000000000000000000
+    ```
+1. Review the output files (optional)
+    1. Run the `build.bash` script.  (Note that the wrap patch version should be 0.)
+    1. Review the zip file created in the zips folder.
+    1. Review the wrap file created in the wraps folder.
+    1. **IMPORTANT:** Delete the zip file and wrap file created.
+1. **IMPORTANT:** Commit the new files in the patch folder.
+1. Run the `build.bash` script.  (Note that the wrap patch version should be 1.)
+1. Commit the new zip file and wrap file with patch version 1.
 
 ----
 
 To modify an existing project:
 
 1. Make required changes to an existing subfolder inside the `patches` folder.
+1. **IMPORTANT:** Commit the new files in the patch folder.
+1. Commit the changes so that the wrap version will increment properly.
 1. Run the `build.bash` script.
-1. Review the updated zip file generated in the zips folder
-1. Review the updated wrap file generated in the wraps folder
-1. Commit and push changes
+1. Review the updated zip file generated in the zips folder.
+1. Review the updated wrap file generated in the wraps folder.
+1. If the updated files are not correct, delete them, undo the last commit in git, and then go back to step 1.
+1. Commit and push the updated zip and wrap files.
 
 ----
 

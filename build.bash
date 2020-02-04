@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 PATCH_URL=https://github.com/kyonifer/meson-wraps/raw/master/zips/
 
-pushd patches
+pushd patches > /dev/null
 
 for i in */; do
     # Use number of commits that occur in the folder as wrap version number
@@ -22,7 +22,15 @@ for i in */; do
             "\npatch_filename=${FNAME}" \
             "\npatch_hash=${HASH}" |
             cat ${UPSTREAM_WRAP} - >${OUTPUT_WRAP}
+    else
+        echo "skipping ${i%/}"
     fi
 done
 
-popd
+popd > /dev/null
+
+echo ""
+echo "If projects were unexpectedly skipped, commit changes "
+echo "to the patch folder in git and rerun."
+echo ""
+echo "Complete."
