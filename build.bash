@@ -19,10 +19,9 @@ for i in */; do
 
         # Add patch url, filename, hash lines to upstream.wrap and save output
         # in the wraps folder
-        echo -e "\n" \
-            "patch_url=${PATCH_URL}${FNAME}\n" \
-            "patch_filename=${FNAME}\n" \
-            "patch_hash=${HASH}\n" |
+        echo -e "\npatch_url=${PATCH_URL}${FNAME}" \
+            "\npatch_filename=${FNAME}" \
+            "\npatch_hash=${HASH}" |
             cat ${UPSTREAM_WRAP} - >${OUTPUT_WRAP}
     fi
 done
