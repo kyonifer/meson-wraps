@@ -1,9 +1,10 @@
 [wrap-file]
-source_url=https://github.com/QuantStack/xtensor/archive/0.20.4.zip
-source_filename=0.20.4.zip
 directory=xtensor-0.20.4
+
+source_url=https://github.com/QuantStack/xtensor/archive/0.20.4.zip
+source_filename=xtensor-0.20.4.zip
 source_hash=7f142bb367ec14a058ae3290364407c9b4afd414d3be01b1827d4260545fa528
 
-patch_url=https://github.com/kyonifer/meson-wraps/raw/6ee8265913b81b43d5e930e43c5c5012c5434b40/zips/xtensor-0.20.4-patches.zip?raw=true
-patch_filename=xtensor-0.20.4-patches.zip
-patch_hash=13ee39976583e4d760ff2520428804a86d53e6a55eeff1c8b5c870cfd1899265
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-0.20.4-patches-4.zip 
+patch_filename=xtensor-0.20.4-patches-4.zip 
+patch_hash=3906c71312edc7f939084602549072f1a7ee3917921d5dbb09ffa5c750db8881

@@ -1,9 +1,10 @@
 [wrap-file]
-source_url=https://github.com/QuantStack/xtensor-julia/archive/0.8.2.zip
-source_filename=0.8.2.zip
 directory=xtensor-julia-0.8.2
+
+source_url=https://github.com/QuantStack/xtensor-julia/archive/0.8.2.zip
+source_filename=xtensor-julia-0.8.2.zip
 source_hash=94f4d92834f2d4557e221054812e5d95e8b7d36a36c4c4355c412755051f6ad8
 
-patch_url=https://github.com/kyonifer/meson-wraps/raw/6ee8265913b81b43d5e930e43c5c5012c5434b40/zips/xtensor-julia-0.8.2-patches.zip?raw=true
-patch_filename=xtensor-julia-0.8.2-patches.zip
-patch_hash=8bc11909cc9cf50f1fe1f96022c73572f40c26bb3e686ae86b480dc54ef46a0e
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-julia-0.8.2-patches-6.zip 
+patch_filename=xtensor-julia-0.8.2-patches-6.zip 
+patch_hash=83109d8b2c3dd353cd171e77145d911f041aebc9096d7d353060141922feb58c

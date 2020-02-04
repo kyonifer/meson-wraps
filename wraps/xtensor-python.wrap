@@ -1,9 +1,10 @@
 [wrap-file]
-source_url=https://github.com/QuantStack/xtensor-python/archive/0.23.0.zip
-source_filename=0.23.0.zip
 directory=xtensor-python-0.23.0
+
+source_url=https://github.com/QuantStack/xtensor-python/archive/0.23.0.zip
+source_filename=xtensor-python-0.23.0.zip
 source_hash=91ebdf87fac2d5497e3c3e02b1f30d32b18d56a79483964066fe72ccafcab8b9
 
-patch_url=https://github.com/kyonifer/meson-wraps/raw/6ee8265913b81b43d5e930e43c5c5012c5434b40/zips/xtensor-python-0.23.0-patches.zip?raw=true
-patch_filename=xtensor-python-0.23.0-patches.zip
-patch_hash=ca2d114f43ff948281564c2a435fdff33d9a4d608514035fb6b513ef3bd00852
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-python-0.23.0-patches-6.zip 
+patch_filename=xtensor-python-0.23.0-patches-6.zip 
+patch_hash=ad6e62f20768d2976e5e09c9fc39df90f9d838116a5148800b1a369b59f6e756
