@@ -4,17 +4,23 @@ The purpose of this repository is to test new or modified wrap files.  Ultimatel
 
 To add a new project or version of a project:
 
-1. Create a new subfolder in `patches` named 'project-version'.  
-1. Inside this subfolder place the meson.build file(s) as they would apply to the project
+1. Create a new subfolder in `patches` named in the following manner:
+    - If the archive that contains the subproject source files (specified in `source_url` of `upstream.wrap`, see below) contains a root folder, set the subfolder name to match the root folder name. 
+    - If the archive doesn't contain a root folder, set the subfolder name to 'project-version'.
+1. Inside this subfolder place the meson.build file(s) as they would apply to the project (do not include root folder of the archive if there is one)
 1. Also add an `upstream.wrap` file following this template:
     ```
     [wrap-file]
-    directory=project-0.1
+    directory=project0.1-x86_64
 
-    source_url=https://example.com/download/0.1/project-0.1.zip
+    source_url=https://example.com/download/archive/project0.1-x86_64_20200202.zip
     source_filename=project-0.1.zip
     source_hash=0000000000000000000000000000000000000000000000000000000000000000
     ```
+    - `directory` must match the name of the subfolder for this project in the `patches` directory (see above).  If there is no root folder, add the line `lead_directory_missing=true` to `upstream.wrap`.
+    - `source_filename` does not have to match the filename of the archive downloaded from `source_url`.  
+        - This is how the source file will be saved in the `subprojects/packagecache` directory, so please name it 'project-version.zip'.  
+        - The wrap generation script will use this value to create the name of the wrap file as 'project.wrap'.
 1. Review the output files (optional)
     1. Run the `build.bash` script.  (Note that the wrap patch version should be 0.)
     1. Review the zip file created in the zips folder.
