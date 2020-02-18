@@ -4,7 +4,3 @@ directory=xtensor-blas-0.16.1
 source_url=https://github.com/xtensor-stack/xtensor-blas/archive/0.16.1.zip
 source_filename=xtensor-blas-0.16.1.zip
 source_hash=f529f613fb6cde1ad772756b43ef5b24ee4ba3a356b6fc2600d8775e0efeacbd
-
-patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-blas-0.16.1-patches-13.zip 
-patch_filename=xtensor-blas-0.16.1-patches-13.zip 
-patch_hash=4dd88b6ad500bca178cff28156ad9626e2dd7df5e9ff93c8ac7bd37f3ae2704d

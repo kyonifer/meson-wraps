@@ -1,0 +1,6 @@
+[wrap-file]
+directory=xtensor-julia-0.8.2
+
+source_url=https://github.com/QuantStack/xtensor-julia/archive/0.8.2.zip
+source_filename=xtensor-julia-0.8.2.zip
+source_hash=94f4d92834f2d4557e221054812e5d95e8b7d36a36c4c4355c412755051f6ad8

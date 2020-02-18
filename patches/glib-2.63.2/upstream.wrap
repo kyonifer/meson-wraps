@@ -1,0 +1,6 @@
+[wrap-file]
+directory=glib-2.63.2
+
+source_url=https://gitlab.gnome.org/GNOME/glib/-/archive/2.63.2/glib-2.63.2.tar.bz2
+source_filename=glib-2.63.2.tar.bz2
+source_hash=3c193c290965d91dee342612568a5d07be9f648d23d986546505af2d18bb5ab5

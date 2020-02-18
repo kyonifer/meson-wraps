@@ -5,7 +5,3 @@ source_url=https://newcontinuum.dl.sourceforge.net/project/openblas/v0.2.12/ming
 source_filename=openblas-mingw-dlls-0.2.12.zip
 source_hash=a75b3bdd35d48dd9e7de6bad0442e9aedc8b73420390f9949a2ac7dd20071b71
 lead_directory_missing=true
-
-patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/openblas-mingw-dlls-0.2.12-patches-4.zip 
-patch_filename=openblas-mingw-dlls-0.2.12-patches-4.zip 
-patch_hash=e9b39089f433c15d09e31948bdbade741bf07a50c7693175a428e5fab8538fa8
