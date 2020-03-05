@@ -116,3 +116,14 @@ if blas_lapack_found and xtensor_dep.found()
 else
     xtensor_blas_dep = dependency('', required: false) # aka "not found"
 endif
+
+install_headers(
+    'include/xtensor-blas/xblas_config_cling.hpp.in',
+    'include/xtensor-blas/xblas_config.hpp',
+    'include/xtensor-blas/xblas.hpp',
+    'include/xtensor-blas/xblas_utils.hpp',
+    'include/xtensor-blas/xlapack.hpp',
+    'include/xtensor-blas/xlinalg.hpp',
+    subdir: 'xtensor-blas')
+
+install_subdir('include/xflens', install_dir: 'include')
