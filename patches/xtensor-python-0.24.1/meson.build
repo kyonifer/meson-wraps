@@ -34,3 +34,13 @@ else
             include_directories(npy_incstr, is_system: true)],
         dependencies:[xtensor_dep, pybind_dep])
 endif
+
+install_headers(
+    'include/xtensor-python/pyarray.hpp',
+    'include/xtensor-python/pycontainer.hpp',
+    'include/xtensor-python/pystrides_adaptor.hpp',
+    'include/xtensor-python/pytensor.hpp',
+    'include/xtensor-python/pyvectorize.hpp',
+    'include/xtensor-python/xtensor_python_config.hpp',
+    'include/xtensor-python/xtensor_type_caster_base.hpp',
+    subdir: 'xtensor-python')

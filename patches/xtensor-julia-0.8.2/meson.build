@@ -88,3 +88,11 @@ if (not problem)
 else
     xtensor_julia_dep = dependency('', required: false)
 endif
+
+install_headers(
+    'include/xtensor-julia/jlarray.hpp',
+    'include/xtensor-julia/jlcontainer.hpp',
+    'include/xtensor-julia/jltensor.hpp',
+    'include/xtensor-julia/jlvectorize.hpp',
+    'include/xtensor-julia/xtensor_julia_config.hpp',
+    subdir: 'xtensor-julia')
