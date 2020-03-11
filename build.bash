@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-PATCH_URL=https://github.com/UnoccupiedColonist/meson-wraps/raw/installer_fixes/zips/
+PATCH_URL=https://github.com/kyonifer/meson-wraps/raw/master/zips/
 
 pushd patches >/dev/null
 
