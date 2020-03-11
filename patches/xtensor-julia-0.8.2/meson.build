@@ -89,10 +89,11 @@ else
     xtensor_julia_dep = dependency('', required: false)
 endif
 
-install_headers(
-    'include/xtensor-julia/jlarray.hpp',
-    'include/xtensor-julia/jlcontainer.hpp',
-    'include/xtensor-julia/jltensor.hpp',
-    'include/xtensor-julia/jlvectorize.hpp',
-    'include/xtensor-julia/xtensor_julia_config.hpp',
-    subdir: 'xtensor-julia')
+# Workaround from mesonbuild/meson github issue 2550
+if meson.is_subproject()
+    install_dir = get_option('subproj_includedir')
+else
+    install_dir = get_option('includedir')
+endif
+
+install_subdir('include/xtensor-julia', install_dir: install_dir)

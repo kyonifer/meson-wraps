@@ -15,38 +15,20 @@ else
     pybind11_dp = dependency('', required: false)
 endif
 
-install_headers(
-    'include/pybind11/attr.h',
-    'include/pybind11/buffer_info.h',
-    'include/pybind11/cast.h',
-    'include/pybind11/chrono.h',
-    'include/pybind11/common.h',
-    'include/pybind11/complex.h',
-    'include/pybind11/eigen.h',
-    'include/pybind11/embed.h',
-    'include/pybind11/eval.h',
-    'include/pybind11/functional.h',
-    'include/pybind11/iostream.h',
-    'include/pybind11/numpy.h',
-    'include/pybind11/operators.h',
-    'include/pybind11/options.h',
-    'include/pybind11/pybind11.h',
-    'include/pybind11/pytypes.h',
-    'include/pybind11/stl_bind.h',
-    'include/pybind11/stl.h',
-    subdir: 'pybind11')
+# Workaround from mesonbuild/meson github issue 2550
+if meson.is_subproject()
+    install_dir = get_option('subproj_includedir')
+    extra_cflags = '-I' + get_option('prefix') / install_dir
+else
+    install_dir = get_option('includedir')
+    extra_cflags = ''
+endif
 
-install_headers(
-    'include/pybind11/detail/class.h',
-    'include/pybind11/detail/common.h',
-    'include/pybind11/detail/descr.h',
-    'include/pybind11/detail/init.h',
-    'include/pybind11/detail/internals.h',
-    'include/pybind11/detail/typeid.h',
-    subdir: 'pybind11/detail')
+install_subdir('include/pybind11', install_dir: install_dir)
 
 pkgconfig = import('pkgconfig')
 pkgconfig.generate(name: 'pybind11',
     version: meson.project_version(),
     description: 'Seamless operability between C++11 and Python',
-    requires: 'python3')
+    requires: 'python3',
+    extra_cflags: extra_cflags)

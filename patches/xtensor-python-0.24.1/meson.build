@@ -35,12 +35,11 @@ else
         dependencies:[xtensor_dep, pybind_dep])
 endif
 
-install_headers(
-    'include/xtensor-python/pyarray.hpp',
-    'include/xtensor-python/pycontainer.hpp',
-    'include/xtensor-python/pystrides_adaptor.hpp',
-    'include/xtensor-python/pytensor.hpp',
-    'include/xtensor-python/pyvectorize.hpp',
-    'include/xtensor-python/xtensor_python_config.hpp',
-    'include/xtensor-python/xtensor_type_caster_base.hpp',
-    subdir: 'xtensor-python')
+# Workaround from mesonbuild/meson github issue 2550
+if meson.is_subproject()
+    install_dir = get_option('subproj_includedir')
+else
+    install_dir = get_option('includedir')
+endif
+
+install_subdir('include/xtensor-python', install_dir: install_dir)

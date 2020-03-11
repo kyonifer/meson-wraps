@@ -1,0 +1,6 @@
+[wrap-file]
+directory = json-3.5.0
+
+source_url = https://github.com/nlohmann/json/archive/v3.5.0.zip
+source_filename = nlohmann_json-3.5.0.zip
+source_hash = a65127f2797487cf07fdf1caacdff56ba3197ff02095cf0fde5bb35e91c86980
