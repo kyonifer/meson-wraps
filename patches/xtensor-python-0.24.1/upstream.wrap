@@ -1,0 +1,6 @@
+[wrap-file]
+directory=xtensor-python-0.24.1
+
+source_url=https://github.com/QuantStack/xtensor-python/archive/0.24.1.zip
+source_filename=xtensor-python-0.24.1.zip
+source_hash=b2ad87af0b1880a2e0c5338a813403ae894003fa9bd2bf4243a1b04de68bdb3d
