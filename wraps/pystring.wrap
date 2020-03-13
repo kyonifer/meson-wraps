@@ -5,6 +5,6 @@ source_url=https://github.com/imageworks/pystring/archive/v1.1.3.zip
 source_filename=pystring-1.1.3.zip
 source_hash=35d7f3ed1e7a82d36549f8d244e12c2c85ae9892f07cff6f3823e1b5ca689e20
 
-patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/pystring-1.1.3-patches-4.zip 
-patch_filename=pystring-1.1.3-patches-4.zip 
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/pystring-1.1.3-patches-4.zip
+patch_filename=pystring-1.1.3-patches-4.zip
 patch_hash=e88d11f90a26ff9c708c4975cf8c747c46aa30ef4ac3173b7759a01a4b7b3d3d

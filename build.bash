@@ -23,9 +23,10 @@ for i in */; do
 
         # Add patch url, filename, hash lines to upstream.wrap and save output
         # in the wraps folder
-        echo -e "\npatch_url=${PATCH_URL}${FNAME}" \
-            "\npatch_filename=${FNAME}" \
-            "\npatch_hash=${HASH}" |
+        printf "\n%s\n%s\n%s\n" \
+            "patch_url=${PATCH_URL}${FNAME}" \
+            "patch_filename=${FNAME}" \
+            "patch_hash=${HASH}" |
             cat ${UPSTREAM_WRAP} - >${OUTPUT_WRAP}
     else
         echo "skipping folder ${i%/}"
