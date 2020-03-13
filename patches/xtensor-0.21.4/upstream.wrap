@@ -4,7 +4,3 @@ directory=xtensor-0.21.4
 source_url=https://github.com/xtensor-stack/xtensor/archive/0.21.4.zip
 source_filename=xtensor-0.21.4.zip
 source_hash=63fec2d0b81dac5d76e5cf7dd0260bc8d57d768f12fc37da7513b4850aa2109d
-
-patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-0.21.4-patches-0.zip 
-patch_filename=xtensor-0.21.4-patches-0.zip 
-patch_hash=d0e5349bc4428b1fbbc27c68b190559f873e19f81165b5f77b32a95606e035ab
