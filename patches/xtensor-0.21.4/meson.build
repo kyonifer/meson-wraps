@@ -1,5 +1,5 @@
 project('xtensor', 'cpp',
-        version:'0.20.4',
+        version:'0.21.4',
         license:'BSD-3-Clause',
         default_options : ['warning_level=3', 'cpp_std=c++14'])
 
