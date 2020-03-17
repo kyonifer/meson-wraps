@@ -1,0 +1,6 @@
+[wrap-file]
+directory = pybind11-2.4.3
+
+source_url = https://github.com/pybind/pybind11/archive/v2.4.3.zip
+source_filename = pybind11-2.4.3.zip
+source_hash = f1cc1e9c2836f9873aefdaf76a3280a55aae51068c759b27499a9cf34090d364
