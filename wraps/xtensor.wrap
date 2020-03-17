@@ -5,6 +5,6 @@ source_url=https://github.com/xtensor-stack/xtensor/archive/0.21.4.zip
 source_filename=xtensor-0.21.4.zip
 source_hash=63fec2d0b81dac5d76e5cf7dd0260bc8d57d768f12fc37da7513b4850aa2109d
 
-patch_url=https://github.com/UnoccupiedColonist/meson-wraps/raw/installer_fixes/zips/xtensor-0.21.4-patches-3.zip 
-patch_filename=xtensor-0.21.4-patches-3.zip 
-patch_hash=920b8934a6550d903011f81f6e4e78022d4f292eb0bbff4b23aabca49eca2f09
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-0.21.4-patches-4.zip
+patch_filename=xtensor-0.21.4-patches-4.zip
+patch_hash=9b2667015d8db9fb1e81f3168d2cf5c4f6ae8328d75a89cab8292b246add97c3
