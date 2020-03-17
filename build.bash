@@ -7,7 +7,7 @@ for i in */; do
     # Use number of commits that occur in the folder as wrap version number
     WRAP_VER=$(git log --oneline $i | wc -l)
     UPSTREAM_WRAP=${i}upstream.wrap
-    # Set the PROJECT_NAME to match basename of
+    # Set the PROJECT_NAME to match basename of source_filename in upstream.wrap
     # Print the contents of upstream.wrap, then feed through 2 filters with sed:
     # 1. Match the line that starts with 'source_filename = ' with arbitrary spacing and return everything after that
     # 2. Strip the extension (expecting some kind of archive)
@@ -23,9 +23,10 @@ for i in */; do
 
         # Add patch url, filename, hash lines to upstream.wrap and save output
         # in the wraps folder
-        echo -e "\npatch_url=${PATCH_URL}${FNAME}" \
-            "\npatch_filename=${FNAME}" \
-            "\npatch_hash=${HASH}" |
+        printf "\n%s\n%s\n%s\n" \
+            "patch_url=${PATCH_URL}${FNAME}" \
+            "patch_filename=${FNAME}" \
+            "patch_hash=${HASH}" |
             cat ${UPSTREAM_WRAP} - >${OUTPUT_WRAP}
     else
         echo "skipping folder ${i%/}"

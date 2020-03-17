@@ -1,0 +1,10 @@
+[wrap-file]
+directory = json-3.5.0
+
+source_url = https://github.com/nlohmann/json/archive/v3.5.0.zip
+source_filename = nlohmann_json-3.5.0.zip
+source_hash = a65127f2797487cf07fdf1caacdff56ba3197ff02095cf0fde5bb35e91c86980
+
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/nlohmann_json-3.5.0-patches-1.zip
+patch_filename=nlohmann_json-3.5.0-patches-1.zip
+patch_hash=6585b48ef5cbf133d9c689c0b3748cc0ecb7324260ce87b96cf00d09bb0a1cdd

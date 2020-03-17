@@ -3,12 +3,15 @@ project('xtensor-blas', 'cpp',
     license:'BSD-3-Clause',
     default_options : ['warning_level=3', 'cpp_std=c++14'])
 
-xtensor_blas_deps = [dependency('xtensor',
+
+xtensor_dep = dependency('xtensor',
     version:'>=0.20.0',
-    fallback: ['xtensor', 'xtensor_dep'] )]
+    fallback: ['xtensor', 'xtensor_dep'],
+    required: false)
 
 xtensor_blas_cpp_arg = []
-xtensor_blas_includes = [include_directories('include', is_system: true)]
+
+xtensor_blas_deps = []
 
 # xtensor-blas is an interface between xtensor and BLAS/LAPACK.  It enables use of xlinalg.hpp functions in xtensor.
 # BLAS is a collection of low-level matrix and vector arithmetic operations.  Basic Linear Algebra Subprograms
@@ -18,7 +21,7 @@ xtensor_blas_includes = [include_directories('include', is_system: true)]
 
 # Here we begin the long journey of attempting to find said BLAS and LAPACK implementations.
 # This optimistic initial value will be updated by the foreach below if we can't find the symbols we need.
-blas_lapack_found = true  
+blas_lapack_found = true
 cpp_compiler = meson.get_compiler('cpp')
 
 # We need these symbols defined, and have a rough guess of which library might define them, but
@@ -37,7 +40,6 @@ looking_for = {
 }
 detected_blas_deps = []
 
-message('Searching for a system-installed BLAS and LAPACK implementation that works...')
 foreach symbol, depnames : looking_for
     found_function = cpp_compiler.has_function(symbol, dependencies: detected_blas_deps)
     if not found_function
@@ -70,7 +72,6 @@ if (not blas_lapack_found) and (host_machine.system() == 'windows')
     if prebuilt_openblas_dep.found()
         blas_lapack_found = true
         xtensor_blas_deps += [prebuilt_openblas_dep]
-        warning('BLAS and LAPACK were not found installed on the system.  Falling back to prebuilt OpenBLAS.')
     endif
 
 endif
@@ -105,11 +106,24 @@ if not blas_lapack_found
     blas_lapack_found = false
 endif
 
-if blas_lapack_found
-    xtensor_blas_dep = declare_dependency(include_directories: xtensor_blas_includes,
-                                          dependencies: xtensor_blas_deps,
-                                          compile_args: xtensor_blas_cpp_arg)
+include_directories('include', is_system: true)
+
+if blas_lapack_found and xtensor_dep.found()
+    xtensor_blas_dep = declare_dependency(
+        include_directories: include_directories('include', is_system: true),
+        dependencies: [xtensor_dep, xtensor_blas_deps],
+        compile_args: xtensor_blas_cpp_arg)
 else
-    warning('Could not find BLAS and LAPACK libraries, disabling xtensor-blas.')
-    xtensor_blas_dep = disabler()
+    xtensor_blas_dep = dependency('', required: false) # aka "not found"
 endif
+
+# Workaround from mesonbuild/meson github issue 2550
+if meson.is_subproject()
+    install_dir = get_option('subproj_includedir')
+else
+    install_dir = get_option('includedir')
+endif
+
+install_subdir('include/xtensor-blas/', install_dir: install_dir)
+
+install_subdir('include/xflens', install_dir: install_dir)

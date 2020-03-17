@@ -1,4 +1,3 @@
-option('XTENSOR_USE_XSIMD', type: 'boolean', value: false, description: 'simd acceleration for xtensor')
 option('subproj_includedir',
     type: 'string',
     value: 'include',
