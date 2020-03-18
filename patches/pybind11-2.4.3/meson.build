@@ -6,8 +6,16 @@ py3_dep = python3.dependency(embed: true)
 
 pybind11_incdir = include_directories('include')
 
+compile_args = []
+
+if meson.get_compiler('cpp').get_id() == 'clang'
+    # https://github.com/pybind/pybind11/issues/1604
+    compile_args += '-fsized-deallocation'
+endif
+
 if py3_dep.found()
     pybind11_dep = declare_dependency(
+        compile_args : compile_args,
         include_directories : pybind11_incdir,
         dependencies : py3_dep)
 else
@@ -15,13 +23,14 @@ else
     pybind11_dp = dependency('', required: false)
 endif
 
+extra_cflags = compile_args
+
 # Workaround from mesonbuild/meson github issue 2550
 if meson.is_subproject()
     install_dir = get_option('subproj_includedir')
-    extra_cflags = '-I' + get_option('prefix') / install_dir
+    extra_cflags += '-I' + get_option('prefix') / install_dir
 else
     install_dir = get_option('includedir')
-    extra_cflags = ''
 endif
 
 install_subdir('include/pybind11', install_dir: install_dir)
