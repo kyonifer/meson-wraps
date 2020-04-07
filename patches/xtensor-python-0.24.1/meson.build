@@ -6,12 +6,12 @@ project('xtensor-python', 'cpp',
 not_found_dependency = dependency('', required: false)
 
 pybind_dep = dependency('pybind11',
-    version: '2.4.3',
+    version: ['>=2.4.3', '<2.5.0'],
     fallback: ['pybind11', 'pybind11_dep'],
     required: false)
 
 xtensor_dep = dependency('xtensor',
-    version:'>=0.21.4',
+    version: ['>=0.21.2', '<1.0.0'],
     fallback : ['xtensor', 'xtensor_dep'],
     required: false)
 

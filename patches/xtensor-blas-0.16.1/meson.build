@@ -5,7 +5,7 @@ project('xtensor-blas', 'cpp',
 
 
 xtensor_dep = dependency('xtensor',
-    version:'>=0.20.0',
+    version: ['>=0.20.4', '<1.0.0'],
     fallback: ['xtensor', 'xtensor_dep'],
     required: false)
 

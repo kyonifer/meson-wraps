@@ -4,7 +4,7 @@ project('xtensor', 'cpp',
         default_options : ['warning_level=3', 'cpp_std=c++14'])
 
 xtl_dep = dependency('xtl',
-    version:'>=0.6.3',
+    version: ['>=0.6.2', '<1.0.0'],
     fallback : ['xtl', 'xtl_dep'],
     required: false)
 
@@ -17,7 +17,7 @@ required_deps_found = xtl_dep.found()
 
 if get_option('XTENSOR_USE_XSIMD')
     xsimd_dep = dependency('xsimd',
-        version:'>=7.0.0',
+        version: ['>=7.0.0', '<8.0.0'],
         fallback : ['xsimd', 'xsimd_dep'],
         required: false)
     xtensor_cpp_arg = ['-DXTENSOR_USE_XSIMD']

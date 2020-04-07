@@ -5,7 +5,7 @@ project('xtensor-julia',
     default_options : ['warning_level=3', 'cpp_std=c++14'])
 
 xtensor_dep = dependency('xtensor',
-    version:'>=0.20.4',
+    version: ['>=0.20.4', '<1.0.0'],
     fallback : ['xtensor', 'xtensor_dep'] )
 
 cc = meson.get_compiler('cpp')
