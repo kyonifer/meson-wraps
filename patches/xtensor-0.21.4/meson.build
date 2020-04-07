@@ -13,7 +13,7 @@ json_dep = dependency('nlohmann_json',
     fallback : ['nlohmann_json', 'nlohmann_json_dep'],
     required: false)
 
-all_deps_found = json_dep.found() and xtl_dep.found()
+required_deps_found = xtl_dep.found()
 
 if get_option('XTENSOR_USE_XSIMD')
     xsimd_dep = dependency('xsimd',
@@ -21,13 +21,13 @@ if get_option('XTENSOR_USE_XSIMD')
         fallback : ['xsimd', 'xsimd_dep'],
         required: false)
     xtensor_cpp_arg = ['-DXTENSOR_USE_XSIMD']
-    all_deps_found = all_deps_found and xsimd_dep.found()
+    required_deps_found = required_deps_found and xsimd_dep.found()
 else
     xsimd_dep = dependency('', required: false) # aka "not found"
     xtensor_cpp_arg = []
 endif
 
-if all_deps_found
+if required_deps_found
     xtensor_dep = declare_dependency(
         include_directories:include_directories('include', is_system: true),
         dependencies: [xtl_dep, json_dep, xsimd_dep],
