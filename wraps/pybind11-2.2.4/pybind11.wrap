@@ -1,0 +1,10 @@
+[wrap-file]
+directory = pybind11-2.2.4
+
+source_url = https://github.com/pybind/pybind11/archive/v2.2.4.zip
+source_filename = pybind11-2.2.4.zip
+source_hash = c62073cd8d4f9209ad64092279e757f5fd83327a5b17a72c04fd0fea27d0d593
+
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/pybind11-2.2.4-patches-4.zip
+patch_filename=pybind11-2.2.4-patches-4.zip
+patch_hash=d6df345687f2f9eb1f5a427e2c672ca18a849a01685b5688aa359ae29c67d295
