@@ -19,7 +19,9 @@ for i in */; do
         zip -r "$ZIPNAME" "$i" --exclude "$UPSTREAM_WRAP"
 
         HASH=$(sha256sum $ZIPNAME | cut -c1-64)
-        OUTPUT_WRAP=../wraps/${PROJECT_NAME%-*}.wrap
+        OUTPUT_WRAP=../wraps/${PROJECT_NAME}/${PROJECT_NAME%-*}.wrap
+
+        mkdir -p ../wraps/${PROJECT_NAME}
 
         # Add patch url, filename, hash lines to upstream.wrap and save output
         # in the wraps folder
