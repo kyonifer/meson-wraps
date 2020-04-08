@@ -1,0 +1,6 @@
+[wrap-file]
+directory=xtensor-blas-0.17.2
+
+source_url=https://github.com/xtensor-stack/xtensor-blas/archive/0.17.2.zip
+source_filename=xtensor-blas-0.17.2.zip
+source_hash=c78a33eb01e020a91d74f0248576bc91a7123320093501d6311d7bb37ee099fb
