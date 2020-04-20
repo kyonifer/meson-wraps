@@ -5,6 +5,6 @@ source_url=https://github.com/QuantStack/xtensor-python/archive/0.23.0.zip
 source_filename=xtensor-python-0.23.0.zip
 source_hash=91ebdf87fac2d5497e3c3e02b1f30d32b18d56a79483964066fe72ccafcab8b9
 
-patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-python-0.23.0-patches-6.zip
-patch_filename=xtensor-python-0.23.0-patches-6.zip
-patch_hash=ad6e62f20768d2976e5e09c9fc39df90f9d838116a5148800b1a369b59f6e756
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-python-0.23.0-patches-9.zip
+patch_filename=xtensor-python-0.23.0-patches-9.zip
+patch_hash=b9ded67bd79a3e8c0c05874b01d311f6c711ff9fb212656e726a6a0aeb1a7969
