@@ -1,0 +1,10 @@
+[wrap-file]
+directory=xtensor-blas-0.17.2
+
+source_url=https://github.com/xtensor-stack/xtensor-blas/archive/0.17.2.zip
+source_filename=xtensor-blas-0.17.2.zip
+source_hash=c78a33eb01e020a91d74f0248576bc91a7123320093501d6311d7bb37ee099fb
+
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-blas-0.17.2-patches-1.zip
+patch_filename=xtensor-blas-0.17.2-patches-1.zip
+patch_hash=785fcab3d3e66bb68a77c8cc47a853e78e5f079112c1f7a3c08d492e44735914

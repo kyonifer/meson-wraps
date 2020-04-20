@@ -1,10 +1,10 @@
 project('xtensor', 'cpp',
-        version:'0.21.4',
+        version:'0.20.4',
         license:'BSD-3-Clause',
         default_options : ['warning_level=3', 'cpp_std=c++14'])
 
 xtl_dep = dependency('xtl',
-    version:['>=0.6.12', '<1.0.0'],
+    version: ['>=0.6.2', '<1.0.0'],
     fallback : ['xtl', 'xtl_dep'],
     required: false)
 
@@ -17,7 +17,7 @@ required_deps_found = xtl_dep.found()
 
 if get_option('XTENSOR_USE_XSIMD')
     xsimd_dep = dependency('xsimd',
-        version: ['>=7.4.6', '<8.0.0'],
+        version: ['>=7.0.0', '<8.0.0'],
         fallback : ['xsimd', 'xsimd_dep'],
         required: false)
     xtensor_cpp_arg = ['-DXTENSOR_USE_XSIMD']
@@ -35,12 +35,3 @@ if required_deps_found
 else
     xtensor_dep = dependency('', required: false) # aka "not found"
 endif
-
-# Workaround from mesonbuild/meson github issue 2550
-if meson.is_subproject()
-    install_dir = get_option('subproj_includedir')
-else
-    install_dir = get_option('includedir')
-endif
-
-install_subdir('include/xtensor', install_dir: install_dir)
