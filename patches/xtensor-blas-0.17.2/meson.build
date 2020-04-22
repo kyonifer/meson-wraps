@@ -39,6 +39,7 @@ looking_for = {
     'dgesv_': ['openblas', 'Accelerate', 'lapack'],
 }
 detected_blas_deps = []
+dependency_names = []
 
 foreach symbol, depnames : looking_for
     found_function = cpp_compiler.has_function(symbol, dependencies: detected_blas_deps)
@@ -51,6 +52,7 @@ foreach symbol, depnames : looking_for
             if cpp_compiler.has_function(symbol, dependencies: detected_blas_deps + [possible_dep])
                 found_function = true
                 detected_blas_deps += [possible_dep]
+                dependency_names += [possible_dep.name()]
                 break
             endif
         endforeach
@@ -62,6 +64,8 @@ foreach symbol, depnames : looking_for
 endforeach
 if blas_lapack_found
     xtensor_blas_deps += detected_blas_deps
+else
+    dependency_names = []
 endif
 
 # Our next choice for Windows are the prebuilt OpenBLAS libraries that we included with the Meson wrap.
@@ -117,9 +121,12 @@ else
     xtensor_blas_dep = dependency('', required: false) # aka "not found"
 endif
 
+extra_cflags = []
+
 # Workaround from mesonbuild/meson github issue 2550
 if meson.is_subproject()
     install_dir = get_option('subproj_includedir')
+    extra_cflags += '-I' + get_option('prefix') / install_dir
 else
     install_dir = get_option('includedir')
 endif
@@ -127,3 +134,12 @@ endif
 install_subdir('include/xtensor-blas/', install_dir: install_dir)
 
 install_subdir('include/xflens', install_dir: install_dir)
+
+dependency_names += 'xtensor'
+
+pkgconfig = import('pkgconfig')
+pkgconfig.generate(name: meson.project_name(),
+    version: meson.project_version(),
+    description: 'an extension to the xtensor library, offering bindings to BLAS and LAPACK libraries through cxxblas and cxxlapack from the FLENS project',
+    requires: dependency_names,
+    extra_cflags: extra_cflags)
