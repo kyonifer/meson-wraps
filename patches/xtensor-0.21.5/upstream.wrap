@@ -1,0 +1,6 @@
+[wrap-file]
+directory=xtensor-0.21.5
+
+source_url=https://github.com/xtensor-stack/xtensor/archive/0.21.5.zip
+source_filename=xtensor-0.21.5.zip
+source_hash=f08aca41dc89128524dec04c82b590d9e0f1e923311e82bab9f024c99e7bb73a
