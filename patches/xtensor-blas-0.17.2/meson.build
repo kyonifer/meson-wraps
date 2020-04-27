@@ -135,6 +135,14 @@ install_subdir('include/xtensor-blas/', install_dir: install_dir)
 
 install_subdir('include/xflens', install_dir: install_dir)
 
+# If we are using Accelerate on Mac, need to add "-framework Accelerate" to libs
+# and skip the requires line since Accelerate doesn't have a pkg-config file
+libs = []
+if 'Accelerate' in dependency_names
+    dependency_names = []
+    libs += '-framework Accelerate'
+endif
+
 dependency_names += 'xtensor'
 
 pkgconfig = import('pkgconfig')
@@ -142,4 +150,5 @@ pkgconfig.generate(name: meson.project_name(),
     version: meson.project_version(),
     description: 'an extension to the xtensor library, offering bindings to BLAS and LAPACK libraries through cxxblas and cxxlapack from the FLENS project',
     requires: dependency_names,
+    libraries: libs,
     extra_cflags: extra_cflags)
