@@ -26,6 +26,8 @@ if (npy_incstr == '')
         '), disabling python bindings.')
 endif
 
+extra_cflags = []
+
 if (npy_incstr == '') or (not pybind_dep.found()) or (not xtensor_dep.found())
     xtensor_python_dep = not_found_dependency
 else
@@ -33,9 +35,9 @@ else
         include_directories: [include_directories('include', is_system: true),
             include_directories(npy_incstr, is_system: true)],
         dependencies:[xtensor_dep, pybind_dep])
-endif
 
-extra_cflags = []
+        extra_cflags += '-I' + npy_incstr
+endif
 
 # Workaround from mesonbuild/meson github issue 2550
 if meson.is_subproject()
