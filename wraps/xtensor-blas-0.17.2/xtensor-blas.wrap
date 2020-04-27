@@ -5,6 +5,6 @@ source_url=https://github.com/xtensor-stack/xtensor-blas/archive/0.17.2.zip
 source_filename=xtensor-blas-0.17.2.zip
 source_hash=c78a33eb01e020a91d74f0248576bc91a7123320093501d6311d7bb37ee099fb
 
-patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-blas-0.17.2-patches-2.zip
-patch_filename=xtensor-blas-0.17.2-patches-2.zip
-patch_hash=d9e270c4b1dfd8088087c2c99a7ce5384550c66df2b8fab4b43201344260bf5a
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/xtensor-blas-0.17.2-patches-3.zip
+patch_filename=xtensor-blas-0.17.2-patches-3.zip
+patch_hash=9279c9b3fd477b39dda9030fedad2528124766085989585c2d0f0e9fdebf94a9
