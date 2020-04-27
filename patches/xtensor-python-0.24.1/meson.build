@@ -53,5 +53,5 @@ pkgconfig = import('pkgconfig')
 pkgconfig.generate(name: meson.project_name(),
     version: meson.project_version(),
     description: 'Python bindings for the xtensor C++ multi-dimensional array library.',
-    requires: ['xtensor', 'pybind'],
+    requires: ['xtensor', 'pybind11'],
     extra_cflags: extra_cflags)
