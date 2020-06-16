@@ -2,7 +2,9 @@ project('pybind11', 'cpp', default_options : ['cpp_std=c++14'], license : 'BSD-s
 
 python3 = import('python').find_installation('python3')
 
-py3_dep = python3.dependency(embed: true)
+libpython3_dep = python3.dependency()
+# Do not include the library, as might be found through pkg-config
+py3_dep = libpython3_dep.partial_dependency(compile_args: true)
 
 pybind11_incdir = include_directories('include')
 
@@ -25,6 +27,10 @@ endif
 
 extra_cflags = compile_args
 
+# Adding "python3" to the requires line in pkg-config could pull in the library;
+# only add the path to the Python headers
+extra_cflags += '-I' + python3.get_path('include')
+
 # Workaround from mesonbuild/meson github issue 2550
 if meson.is_subproject()
     install_dir = get_option('subproj_includedir')
@@ -39,5 +45,4 @@ pkgconfig = import('pkgconfig')
 pkgconfig.generate(name: 'pybind11',
     version: meson.project_version(),
     description: 'Seamless operability between C++11 and Python',
-    requires: 'python3',
     extra_cflags: extra_cflags)
