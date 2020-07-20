@@ -1,0 +1,9 @@
+[wrap-file]
+directory=imgui-1.77
+source_url=https://github.com/ocornut/imgui/archive/v1.77.tar.gz
+source_filename=dearimgui-v1.77.tar.gz
+source_hash=c0dae830025d4a1a169df97409709f40d9dfa19f8fc96b550052224cbb238fa8
+
+patch_url=https://github.com/kyonifer/meson-wraps/raw/master/zips/dearimgui-v1.77-patches-1.zip
+patch_filename=dearimgui-v1.77-patches-1.zip
+patch_hash=17f9f1241bcc607a2e6e19af11cdbb9db61d122fb0f8dca21632a3edae764168
