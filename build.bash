@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+# To use Docker:
+# docker build -t meson_wraps --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) .
+# docker run -v $(pwd):/work -w /work --rm meson_wraps bash ./build.bash
+
 PATCH_URL=https://github.com/kyonifer/meson-wraps/raw/master/zips/
 
 pushd patches >/dev/null
